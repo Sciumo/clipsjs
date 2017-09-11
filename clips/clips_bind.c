@@ -1,30 +1,53 @@
 #include "./source/branches/63x/core/clips.h"
 
 
-static const char *SYMBOLNAMES[] = {
-    "FLOAT",
-    "INTEGER",
-    "SYMBOL",
-    "STRING",
-    "MULTIFIELD",
-    "EXTERNAL_ADDRESS",
-    "FACT_ADDRESS",
-    "INSTANCE_ADDRESS",
-    "INSTANCE_NAME"
-};
+/*
+ * test function
+ */
+extern float float_multiply(float x, float y) {
+    return x * y;
+}
 
-#define SYMBOLNAMES_LEN 9
+extern int GetDataType(DATA_OBJECT_PTR ptr)
+{
+    if (ptr)
+    {
+        return ptr->type;
+    }
+    else
+    {
+        return -1;
+    }
+}
 
+extern const char *GetDataString(DATA_OBJECT_PTR ptr)
+{
+    if (ptr)
+    {
+        if (ptr->type >= 9)
+        {
+            return "UNK";
+        }
+        return DOPToString(ptr);
+    }
+    else
+    {
+        return "";
+    }
+}
 
-extern const char *GetDataType(DATA_OBJECT_PTR ptr);
-
-const char *GetDataType(DATA_OBJECT_PTR ptr){
-  if(ptr){
-      if( ptr->type >= SYMBOLNAMES_LEN){
-          return "UNK";
-      }
-      return SYMBOLNAMES[ ptr->type ];
-  }else{
-      return "NULL";
-  }
+extern float GetDataNumber(DATA_OBJECT_PTR ptr)
+{
+    if (ptr)
+    {
+        if (ptr->type == INTEGER)
+        {
+            return DOPToInteger(ptr);
+        }
+        if (ptr->type == FLOAT)
+        {
+            return DOPToFloat(ptr);
+        }
+    }
+    return -1;
 }

@@ -5,6 +5,7 @@
         "noEmitOnError": true,
         "noImplicitAny": true,
         "experimentalDecorators": true,
+        "emitDecoratorMetadata" : true,
         "sourceMap": false,
         "inlineSourceMap": true,
         "declaration": true,
